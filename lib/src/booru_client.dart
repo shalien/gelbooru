@@ -124,6 +124,32 @@ class BooruClient {
     return posts.map((e) => Post.fromXml(e)).toList();
   }
 
+  Future<Post?> getPostById(int id) async {
+    if (id < 0) {
+      throw Exception('Id must be greater than 0');
+    }
+
+    Post post;
+
+    try {
+      List<Post>? posts = await getPosts(id: id);
+
+      if (posts == null) {
+        return null;
+      }
+
+      if (posts.isEmpty) {
+        return null;
+      }
+
+      post = posts.first;
+    } catch (e) {
+      rethrow;
+    }
+
+    return post;
+  }
+
   Future<List<Post>?> getPostsByParentId(int id) {
     return getPosts(tags: ['parent:$id']);
   }
