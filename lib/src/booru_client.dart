@@ -22,7 +22,9 @@ class BooruClient {
     return instance;
   }
 
-  Future<int?> getCount({List<String> tags = const []}) async {
+  Future<int?> getCountByTag(String tag) async => await getCount([tag]);
+
+  Future<int?> getCount(List<String> tags) async {
     Uri uri = Uri.https(host, '/index.php', {
       'page': 'dapi',
       's': 'post',
@@ -52,7 +54,9 @@ class BooruClient {
     return int.tryParse(posts.first.getAttribute('count') ?? '');
   }
 
-  Future<int> getMaxPage({List<String> tags = const []}) async {
+  Future<int> getMaxPageByTag(String tag) async => await getMaxPage([tag]);
+
+  Future<int> getMaxPage(List<String> tags) async {
     Uri uri = Uri.https(host, '/index.php', {
       'page': 'dapi',
       's': 'post',

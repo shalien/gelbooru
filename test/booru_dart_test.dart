@@ -25,7 +25,7 @@ void main() {
 
     final client = BooruClient(host);
 
-    final int? count = await client.getCount(tags: ['anal']);
+    final int? count = await client.getCount(['anal']);
 
     expect(count, isNotNull);
   });
@@ -35,7 +35,7 @@ void main() {
 
     final client = BooruClient(host);
 
-    final int maxPage = await client.getMaxPage(tags: ['anal']);
+    final int maxPage = await client.getMaxPage(['anal']);
 
     final List<Post>? posts =
         await client.getPosts(tags: ['anal'], pid: maxPage);
