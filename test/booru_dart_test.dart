@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('XBooru', () async {
-    final String host = 'xbooru.com';
+    final String host = 'rule34.xxx';
 
     final client = BooruClient(host);
 
@@ -13,15 +13,15 @@ void main() {
       throw Exception('Posts is null');
     }
 
-    posts.forEach((element) {
+    for (var element in posts) {
       print(element.id);
-    });
+    }
 
     expect(posts, isNotEmpty);
   });
 
   test('Count posts', () async {
-    final String host = 'xbooru.com';
+    final String host = 'rule34.xxx';
 
     final client = BooruClient(host);
 
@@ -31,7 +31,7 @@ void main() {
   });
 
   test('Max Pages response', () async {
-    final String host = 'xbooru.com';
+    final String host = 'rule34.xxx';
 
     final client = BooruClient(host);
 
@@ -46,7 +46,7 @@ void main() {
   });
 
   test('Find a post with children', () async {
-    final String host = 'xbooru.com';
+    final String host = 'rule34.xxx';
 
     final client = BooruClient(host);
 
@@ -65,7 +65,7 @@ void main() {
   });
 
   test('Find a post by parent id', () async {
-    final String host = 'xbooru.com';
+    final String host = 'rule34.xxx';
 
     final client = BooruClient(host);
 

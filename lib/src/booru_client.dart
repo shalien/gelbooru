@@ -6,7 +6,7 @@ import 'model/post.dart';
 class BooruClient {
   static final Map<String, BooruClient> _instances = <String, BooruClient>{};
 
-  final Client? _client;
+  final Client _client;
 
   final String host;
 
@@ -33,7 +33,7 @@ class BooruClient {
       ...tags.isNotEmpty ? {'tags': tags.join('+')} : {},
     });
 
-    final response = await _client!.get(uri);
+    final response = await _client.get(uri);
 
     if (response.statusCode != 200) {
       throw response;
@@ -65,7 +65,7 @@ class BooruClient {
       ...tags.isNotEmpty ? {'tags': tags.join('+')} : {},
     });
 
-    final response = await _client!.get(uri);
+    final response = await _client.get(uri);
 
     if (response.statusCode != 200) {
       throw response;
@@ -103,7 +103,7 @@ class BooruClient {
       ...id != null ? {'id': id.toString()} : {},
     });
 
-    final response = await _client!.get(uri);
+    final response = await _client.get(uri);
 
     if (response.statusCode != 200) {
       throw response;
