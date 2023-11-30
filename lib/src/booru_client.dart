@@ -1,156 +1,39 @@
 import 'package:http/http.dart';
-import 'package:xml/xml.dart';
 
-import 'model/post.dart';
+import 'data_access_object.dart';
 
-class BooruClient {
-  static final Map<String, BooruClient> _instances = <String, BooruClient>{};
+/// A client for a booru.
+class BooruClient extends BaseClient {
+  /// The inner client.
+  final Client _inner;
 
-  final Client _client;
-
+  /// The host of the booru.
   final String host;
 
-  BooruClient._(this.host, {Client? client}) : _client = client ?? Client();
+  /// The comments data access object.
+  late CommentDataAccessObject comments;
 
-  factory BooruClient(String host, {Client? client}) {
-    if (_instances.containsKey(host)) {
-      return _instances[host]!;
-    }
+  /// The posts data access object.
+  late PostDataAccessObject posts;
 
-    final instance = BooruClient._(host, client: client);
-    _instances[host] = instance;
-    return instance;
+  /// The tags data access object.
+  late TagDataAccessObject tags;
+
+  /// The users data access object.
+  late UserDataAccessObject users;
+
+  /// Create a new [BooruClient].
+  ///
+  /// [host] The host of the booru.
+  BooruClient(this.host, {Client? inner}) : _inner = inner ?? Client() {
+    comments = CommentDataAccessObject(this);
+    posts = PostDataAccessObject(this);
+    tags = TagDataAccessObject(this);
+    users = UserDataAccessObject(this);
   }
 
-  Future<int?> getCountByTag(String tag) async => await getCount([tag]);
-
-  Future<int?> getCount(List<String> tags) async {
-    Uri uri = Uri.https(host, '/index.php', {
-      'page': 'dapi',
-      's': 'post',
-      'q': 'index',
-      'limit': '1',
-      ...tags.isNotEmpty ? {'tags': tags.join('+')} : {},
-    });
-
-    final response = await _client.get(uri);
-
-    if (response.statusCode != 200) {
-      throw response;
-    }
-
-    if (response.body.isEmpty) {
-      throw Exception('Empty response');
-    }
-
-    XmlDocument xml = XmlDocument.parse(response.body);
-
-    var posts = xml.findAllElements('posts');
-
-    if (posts.isEmpty) {
-      return null;
-    }
-
-    return int.tryParse(posts.first.getAttribute('count') ?? '');
-  }
-
-  Future<int> getMaxPageByTag(String tag) async => await getMaxPage([tag]);
-
-  Future<int> getMaxPage(List<String> tags) async {
-    Uri uri = Uri.https(host, '/index.php', {
-      'page': 'dapi',
-      's': 'post',
-      'q': 'index',
-      'limit': '1',
-      ...tags.isNotEmpty ? {'tags': tags.join('+')} : {},
-    });
-
-    final response = await _client.get(uri);
-
-    if (response.statusCode != 200) {
-      throw response;
-    }
-
-    if (response.body.isEmpty) {
-      throw Exception('Empty response');
-    }
-
-    XmlDocument xml = XmlDocument.parse(response.body);
-
-    var posts = xml.findAllElements('posts');
-
-    if (posts.isEmpty) {
-      return 0;
-    }
-
-    return int.tryParse(posts.first.getAttribute('count') ?? '')! ~/ 100;
-  }
-
-  Future<List<Post>?> getPosts(
-      {int limit = 100,
-      int? pid,
-      List<String> tags = const [],
-      int? cid,
-      int? id}) async {
-    Uri uri = Uri.https(host, '/index.php', {
-      'page': 'dapi',
-      's': 'post',
-      'q': 'index',
-      'limit': limit.clamp(1, 100).toString(),
-      ...pid != null ? {'pid': pid.toString()} : {},
-      ...tags.isNotEmpty ? {'tags': tags.join('+')} : {},
-      ...cid != null ? {'cid': cid.toString()} : {},
-      ...id != null ? {'id': id.toString()} : {},
-    });
-
-    final response = await _client.get(uri);
-
-    if (response.statusCode != 200) {
-      throw response;
-    }
-
-    if (response.body.isEmpty) {
-      throw Exception('Empty response');
-    }
-
-    XmlDocument xml = XmlDocument.parse(response.body);
-
-    var posts = xml.findAllElements('post');
-
-    if (posts.isEmpty) {
-      return null;
-    }
-
-    return posts.map((e) => Post.fromXml(e)).toList();
-  }
-
-  Future<Post?> getPostById(int id) async {
-    if (id < 0) {
-      throw Exception('Id must be greater than 0');
-    }
-
-    Post post;
-
-    try {
-      List<Post>? posts = await getPosts(id: id);
-
-      if (posts == null) {
-        return null;
-      }
-
-      if (posts.isEmpty) {
-        return null;
-      }
-
-      post = posts.first;
-    } catch (e) {
-      rethrow;
-    }
-
-    return post;
-  }
-
-  Future<List<Post>?> getPostsByParentId(int id) {
-    return getPosts(tags: ['parent:$id']);
+  @override
+  Future<StreamedResponse> send(BaseRequest request) async {
+    return _inner.send(request);
   }
 }
