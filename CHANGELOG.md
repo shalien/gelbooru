@@ -20,3 +20,7 @@
 ## 3.0.3
 
 - Formating some files 
+
+## 3.1.0
+
+- Changed Gelbooru parameter type and added type checking

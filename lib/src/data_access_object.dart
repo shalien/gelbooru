@@ -17,7 +17,7 @@ abstract base class DataAccessObject<T extends Resource> {
   final GelbooruClient client;
 
   /// The endpoint for the booru.
-  String get host => client.host;
+  String get host => client.host.host;
 
   /// The endpoint for the booru.
   final String _endpoint;

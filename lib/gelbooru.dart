@@ -22,7 +22,7 @@
 ///
 /// void main() async {
 ///
-///   const host = 'https://gelbooru.com';
+///   const host = Uri.parse('https://gelbooru.com');
 ///
 ///   final client = GelbooruClient(host);
 ///   final posts = await client.posts.index();

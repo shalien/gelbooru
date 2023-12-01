@@ -22,7 +22,7 @@ import 'package:gelbooru/gelbooru.dart';
 
 void main() async {
   
-  const host = 'https://gelbooru.com';
+  var host = Uri.parse('https://gelbooru.com');
   
   final client = GelbooruClient(host);
   final posts = await client.posts.index();

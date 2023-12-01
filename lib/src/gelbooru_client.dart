@@ -8,7 +8,7 @@ class GelbooruClient extends BaseClient {
   final Client _inner;
 
   /// The host of the booru.
-  final String host;
+  final Uri host;
 
   /// The comments data access object.
   late CommentDataAccessObject comments;
@@ -26,9 +26,7 @@ class GelbooruClient extends BaseClient {
   ///
   /// [host] The host of the booru.
   /// [inner] The inner client based on http [Client]
-  GelbooruClient(String host, {Client? inner})
-      : host = Uri.parse(host).host,
-        _inner = inner ?? Client() {
+  GelbooruClient(this.host, {Client? inner}) : _inner = inner ?? Client() {
     comments = CommentDataAccessObject(this);
     posts = PostDataAccessObject(this);
     tags = TagDataAccessObject(this);
