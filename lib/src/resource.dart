@@ -32,7 +32,6 @@ abstract base class Resource {
     return other is Resource && other.id == id;
   }
 
-
   @override
   @mustBeOverridden
   int get hashCode => id.hashCode;

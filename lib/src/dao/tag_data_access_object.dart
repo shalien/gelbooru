@@ -23,7 +23,6 @@ const OrderBy orderByCount = 'name';
 
 /// A data access object for [Tag]s.
 final class TagDataAccessObject extends DataAccessObject<Tag> {
-
   /// Create a [TagDataAccessObject].
   TagDataAccessObject(client) : super(client, 'tag');
 

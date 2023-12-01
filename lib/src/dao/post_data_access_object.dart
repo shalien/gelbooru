@@ -2,7 +2,6 @@ part of '../data_access_object.dart';
 
 /// A data access object for [Comment]s.
 final class PostDataAccessObject extends DataAccessObject<Post> {
-
   /// Create a [PostDataAccessObject].
   const PostDataAccessObject(client) : super(client, 'post');
 

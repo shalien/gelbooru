@@ -16,3 +16,7 @@
 ## 3.0.2
 
 - Post pub publication fixes
+
+## 3.0.3
+
+- Formating some files 
