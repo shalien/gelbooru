@@ -1,7 +1,7 @@
 name: gelbooru
 description: A universal package for connectiong ot various gelbooru based imageboards.
-version: 3.0.0
-repository: https://github.com/shalien/booru_dart
+version: 3.0.1
+repository: https://github.com/shalien/gelbooru
 
 environment:
   sdk: ^3.0.5

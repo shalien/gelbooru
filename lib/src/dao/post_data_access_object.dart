@@ -2,6 +2,8 @@ part of '../data_access_object.dart';
 
 /// A data access object for [Comment]s.
 final class PostDataAccessObject extends DataAccessObject<Post> {
+
+  /// Create a [PostDataAccessObject].
   const PostDataAccessObject(client) : super(client, 'post');
 
   /// Return a list of [Post]s.
@@ -69,10 +71,14 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
           'height': element.getAttribute('height') == null
               ? null
               : int.parse(element.getAttribute('height')!),
-          'md5':  element.getAttribute('md5')!,
-          'directory':element.getElement('directory') == null ? null : element.getAttribute('directory')!,
-          'image': element.getElement('image') == null ? null : element.getAttribute('image')!,
-          'rating':  element.getAttribute('rating')!,
+          'md5': element.getAttribute('md5')!,
+          'directory': element.getElement('directory') == null
+              ? null
+              : element.getAttribute('directory')!,
+          'image': element.getElement('image') == null
+              ? null
+              : element.getAttribute('image')!,
+          'rating': element.getAttribute('rating')!,
           'source': element.getAttribute('source')!,
           'change': element.getAttribute('change') == null
               ? null
@@ -81,7 +87,8 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
           'creatorId': element.getAttribute('creator_id') == null
               ? null
               : int.parse(element.getAttribute('creator_id')!),
-          'parentId': element.getAttribute('parent_id') == null || element.getAttribute('parent_id')!.isEmpty
+          'parentId': element.getAttribute('parent_id') == null ||
+                  element.getAttribute('parent_id')!.isEmpty
               ? null
               : int.parse(element.getAttribute('parent_id')!),
           'sample': element.getAttribute('sample') == null
@@ -101,15 +108,15 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
               : bool.parse(element.getAttribute('has_comments')!),
           'fileUrl': element.getAttribute('file_url')!,
           'previewUrl': element.getAttribute('preview_url')!,
-          'tags':  element.getAttribute('tags')!,
-          'sampleUrl':element.getAttribute('sample_url')!,
+          'tags': element.getAttribute('tags')!,
+          'sampleUrl': element.getAttribute('sample_url')!,
           'sampleHeight': element.getAttribute('sample_height') == null
               ? null
               : int.parse(element.getAttribute('sample_height')!),
           'sampleWidth': element.getAttribute('sample_width') == null
               ? null
               : int.parse(element.getAttribute('sample_width')!),
-          'status':  element.getAttribute('status')!,
+          'status': element.getAttribute('status')!,
           'postLocked': element.getAttribute('post_locked') == null
               ? null
               : int.parse(element.getAttribute('post_locked')!),
@@ -122,34 +129,64 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
         };
       } else if (element.children.isNotEmpty) {
         map = {
-          'createdAt' : element.getElement('created_at')!.innerText,
-          'score' : element.getElement('score') == null ? null : int.parse(element.getElement('score')!.innerText),
-          'width' : element.getElement('width') == null ? null : int.parse(element.getElement('width')!.innerText),
-          'height' : element.getElement('height') == null ? null : int.parse(element.getElement('height')!.innerText),
-          'md5' :  element.getElement('md5')!.innerText,
-          'directory' :  element.getElement('directory')!.innerText,
-          'image' :  element.getElement('image')!.innerText,
-          'rating' : element.getElement('rating')!.innerText,
-          'source' :  element.getElement('source')!.innerText,
-          'change' : int.parse(element.getElement('change')!.innerText),
-          'owner' : element.getElement('owner')!.innerText,
-          'creatorId' : element.getElement('creator_id') == null ? null : int.parse(element.getElement('creator_id')!.innerText),
-          'parentId' : element.getElement('parent_id') == null ? null : int.parse(element.getElement('parent_id')!.innerText),
-          'sample' : element.getElement('sample') == null ? null : int.parse(element.getElement('sample')!.innerText),
-          'previewHeight' : element.getElement('preview_height') == null ? null : int.parse(element.getElement('preview_height')!.innerText),
-          'previewWidth' : element.getElement('preview_width') == null ? null : int.parse(element.getElement('preview_width')!.innerText),
-          'hasNotes' : element.getElement('has_notes') == null ? null : bool.parse(element.getElement('has_notes')!.innerText),
-          'hasComments' : element.getElement('has_comments') == null ? null : bool.parse(element.getElement('has_comments')!.innerText),
-          'fileUrl' :  element.getElement('file_url')!.innerText,
-          'previewUrl' :  element.getElement('preview_url')!.innerText,
-          'tags' :  element.getElement('tags')!.innerText,
-          'sampleUrl' :  element.getElement('sample_url')!.innerText,
-          'sampleHeight' : element.getElement('sample_height') == null ? null : int.parse(element.getElement('sample_height')!.innerText),
-          'sampleWidth' : element.getElement('sample_width') == null ? null : int.parse(element.getElement('sample_width')!.innerText),
-          'status' :  element.getElement('status')!.innerText,
-          'postLocked' : element.getElement('post_locked') == null ? null : int.parse(element.getElement('post_locked')!.innerText),
-          'hasChildren' : element.getElement('has_children') == null ? null : bool.parse(element.getElement('has_children')!.innerText),
-          'id' : element.getElement('id') == null ? null : int.parse(element.getElement('id')!.innerText),
+          'createdAt': element.getElement('created_at')!.innerText,
+          'score': element.getElement('score') == null
+              ? null
+              : int.parse(element.getElement('score')!.innerText),
+          'width': element.getElement('width') == null
+              ? null
+              : int.parse(element.getElement('width')!.innerText),
+          'height': element.getElement('height') == null
+              ? null
+              : int.parse(element.getElement('height')!.innerText),
+          'md5': element.getElement('md5')!.innerText,
+          'directory': element.getElement('directory')!.innerText,
+          'image': element.getElement('image')!.innerText,
+          'rating': element.getElement('rating')!.innerText,
+          'source': element.getElement('source')!.innerText,
+          'change': int.parse(element.getElement('change')!.innerText),
+          'owner': element.getElement('owner')!.innerText,
+          'creatorId': element.getElement('creator_id') == null
+              ? null
+              : int.parse(element.getElement('creator_id')!.innerText),
+          'parentId': element.getElement('parent_id') == null
+              ? null
+              : int.parse(element.getElement('parent_id')!.innerText),
+          'sample': element.getElement('sample') == null
+              ? null
+              : int.parse(element.getElement('sample')!.innerText),
+          'previewHeight': element.getElement('preview_height') == null
+              ? null
+              : int.parse(element.getElement('preview_height')!.innerText),
+          'previewWidth': element.getElement('preview_width') == null
+              ? null
+              : int.parse(element.getElement('preview_width')!.innerText),
+          'hasNotes': element.getElement('has_notes') == null
+              ? null
+              : bool.parse(element.getElement('has_notes')!.innerText),
+          'hasComments': element.getElement('has_comments') == null
+              ? null
+              : bool.parse(element.getElement('has_comments')!.innerText),
+          'fileUrl': element.getElement('file_url')!.innerText,
+          'previewUrl': element.getElement('preview_url')!.innerText,
+          'tags': element.getElement('tags')!.innerText,
+          'sampleUrl': element.getElement('sample_url')!.innerText,
+          'sampleHeight': element.getElement('sample_height') == null
+              ? null
+              : int.parse(element.getElement('sample_height')!.innerText),
+          'sampleWidth': element.getElement('sample_width') == null
+              ? null
+              : int.parse(element.getElement('sample_width')!.innerText),
+          'status': element.getElement('status')!.innerText,
+          'postLocked': element.getElement('post_locked') == null
+              ? null
+              : int.parse(element.getElement('post_locked')!.innerText),
+          'hasChildren': element.getElement('has_children') == null
+              ? null
+              : bool.parse(element.getElement('has_children')!.innerText),
+          'id': element.getElement('id') == null
+              ? null
+              : int.parse(element.getElement('id')!.innerText),
         };
       } else {
         throw Exception('No attributes or children found in post element');
@@ -175,7 +212,6 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
       List<String>? tags,
       int? cid,
       int? id}) async {
-
     limit = limit.clamp(1, 100);
 
     Uri uri = Uri.https(super.host, 'index.php', {

@@ -14,8 +14,10 @@ final class Tag extends Resource {
   /// The number of posts with ambiguous tags.
   final bool? ambiguous;
 
+  /// Create a [Tag].
   Tag(this.name, this.count, this.type, this.ambiguous, super.id);
 
+  /// Create a [Tag] from a map.
   @override
   Tag.fromMap(super.map)
       : name = map['name'],

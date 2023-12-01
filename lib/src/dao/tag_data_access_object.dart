@@ -23,6 +23,8 @@ const OrderBy orderByCount = 'name';
 
 /// A data access object for [Tag]s.
 final class TagDataAccessObject extends DataAccessObject<Tag> {
+
+  /// Create a [TagDataAccessObject].
   TagDataAccessObject(client) : super(client, 'tag');
 
   /// Return a list of [Tag]s.
@@ -45,7 +47,6 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
       String? namePattern,
       Order? order,
       OrderBy? orderBy}) async {
-
     limit = limit.clamp(1, 100);
 
     Uri uri = Uri.https(super.host, 'index.php', {
@@ -125,5 +126,4 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
 
     return tags;
   }
-
 }

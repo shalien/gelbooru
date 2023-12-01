@@ -11,8 +11,10 @@ final class User extends Resource {
   /// Whether the user is active.
   bool get isActive => active == 1;
 
+  /// Create a [User].
   const User(this.username, this.active, super.id);
 
+  /// Create a [User] from a map.
   @override
   User.fromMap(super.map)
       : username = map['username'],

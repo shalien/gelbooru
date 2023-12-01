@@ -8,3 +8,7 @@
 - Rewrited totally using the DAO pattern.
 - Added tests foreach type
 - Added example
+
+## 3.0.1
+
+- Post pub publication fixes
