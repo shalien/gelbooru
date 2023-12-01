@@ -2,6 +2,8 @@ part of '../data_access_object.dart';
 
 /// A data access object for [User]s.
 final class UserDataAccessObject extends DataAccessObject<User> {
+
+  /// Create a [UserDataAccessObject].
   const UserDataAccessObject(client) : super(client, 'user');
 
   /// Return a list of [User]s.

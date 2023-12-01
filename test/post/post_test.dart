@@ -1,4 +1,3 @@
-
 import 'package:gelbooru/gelbooru.dart';
 import 'package:test/test.dart';
 import 'dart:io';
@@ -12,7 +11,6 @@ void main() {
     booruClients =
         file.readAsLinesSync().map((host) => GelbooruClient(host)).toList();
   });
-
 
   test('Post index', () async {
     if (booruClients.isEmpty) {

@@ -78,8 +78,10 @@ final class Post extends Resource {
   /// The status of the post.
   final String status;
 
+  /// Whether the post is locked.
   final int? postLocked;
 
+  /// Whether the post is locked.
   bool get isLocked => postLocked == 1 || postLocked == null;
 
   /// Whether the post has children.

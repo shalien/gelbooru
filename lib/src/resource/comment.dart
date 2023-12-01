@@ -14,9 +14,11 @@ final class Comment extends Resource {
   /// The id of the creator of the comment.
   final int creatorId;
 
+  /// Create a [Comment].
   const Comment(
       this.createdAt, this.creator, this.body, this.creatorId, super.id);
 
+  /// Create a [Comment] from a map.
   @override
   Comment.fromMap(super.map)
       : createdAt = DateTime.parse(map['created_at']),

@@ -13,7 +13,6 @@ part 'dao/user_data_access_object.dart';
 
 /// A data access object for a booru.
 abstract base class DataAccessObject<T extends Resource> {
-
   /// The client for the booru.
   final GelbooruClient client;
 
@@ -23,6 +22,7 @@ abstract base class DataAccessObject<T extends Resource> {
   /// The endpoint for the booru.
   final String _endpoint;
 
+  /// Base constructor for a data access object.
   const DataAccessObject(this.client, this._endpoint);
 
   /// Return a list of [T]s.
