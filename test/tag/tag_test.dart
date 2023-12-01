@@ -8,8 +8,10 @@ void main() {
   setUpAll(() {
     File file = File('test/post_hosts.txt');
 
-    booruClients =
-        file.readAsLinesSync().map((host) => GelbooruClient(host)).toList();
+    booruClients = file
+        .readAsLinesSync()
+        .map((e) => GelbooruClient(Uri.parse(e)))
+        .toList();
   });
 
   test('Tag index', () async {
