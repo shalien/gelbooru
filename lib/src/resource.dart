@@ -5,6 +5,7 @@ part 'resource/post.dart';
 part 'resource/tag.dart';
 part 'resource/user.dart';
 
+/// A resource on a booru.
 abstract base class Resource {
   /// The unique identifier for this resource.
   final int id;

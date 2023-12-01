@@ -12,3 +12,7 @@
 ## 3.0.1
 
 - Post pub publication fixes
+
+## 3.0.2
+
+- Post pub publication fixes
