@@ -21,6 +21,7 @@ const OrderBy orderByDate = 'count';
 /// The order by count parameter.
 const OrderBy orderByCount = 'name';
 
+/// A data access object for [Tag]s.
 final class TagDataAccessObject extends DataAccessObject<Tag> {
   TagDataAccessObject(client) : super(client, 'tag');
 
@@ -44,6 +45,9 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
       String? namePattern,
       Order? order,
       OrderBy? orderBy}) async {
+
+    limit = limit.clamp(1, 100);
+
     Uri uri = Uri.https(super.host, 'index.php', {
       'page': 'dapi',
       's': _endpoint,
@@ -105,13 +109,13 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
         };
       } else if (element.children.isNotEmpty) {
         map = {
-          'id':  int.parse(element.getElement('id')!.innerText),
+          'id': int.parse(element.getElement('id')!.innerText),
           'name': element.getElement('name')?.value,
-          'count':int.parse(element.getElement('count')!.innerText),
+          'count': int.parse(element.getElement('count')!.innerText),
           'type': int.tryParse(element.getElement('type')!.innerText),
           'ambiguous': element.getElement('ambiguous')!.innerText == 'true'
-                  ? true
-                  : false,
+              ? true
+              : false,
         };
       } else {
         throw Exception('Tag element is empty');
@@ -122,5 +126,4 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
     return tags;
   }
 
-  /// Return a list of [Tag]s.
 }

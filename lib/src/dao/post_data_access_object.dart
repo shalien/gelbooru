@@ -1,5 +1,6 @@
 part of '../data_access_object.dart';
 
+/// A data access object for [Comment]s.
 final class PostDataAccessObject extends DataAccessObject<Post> {
   const PostDataAccessObject(client) : super(client, 'post');
 
@@ -53,78 +54,103 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
     List<Post> posts = [];
 
     for (var element in document.findAllElements('post')) {
-
       Map<String, dynamic> map;
 
-      if(element.attributes.isNotEmpty) {
+      if (element.attributes.isNotEmpty) {
         map = {
-          'id': int.parse(element.getAttribute('id') ?? '-1'),
-          'tags': element.getAttribute('tags') ?? '',
-          'created_at': element.getAttribute('created_at') ?? '',
-          'creator_id': int.parse(element.getAttribute('creator_id') ?? '-1'),
-          'change': int.parse(element.getAttribute('change') ?? '-1'),
-          'source': element.getAttribute('source') ?? '',
-          'score': element.getAttribute('score') == null
+          'createdAt': element.getAttribute('created_at'),
+          'score': element.getAttribute('score') == null ||
+                  element.getAttribute('score')!.isEmpty
               ? null
-              : int.tryParse(element.getAttribute('score')!),
-          'md5': element.getAttribute('md5') ?? '',
-          'file_url': element.getAttribute('file_url') ?? '',
-          'is_shown_in_index': element.getAttribute('is_shown_in_index') ?? '',
-          'preview_url': element.getAttribute('preview_url') ?? '',
-          'preview_width':
-          int.parse(element.getAttribute('preview_width') ?? '-1'),
-          'preview_height':
-          int.parse(element.getAttribute('preview_height') ?? '-1'),
-          'actual_preview_width':
-          int.parse(element.getAttribute('actual_preview_width') ?? '-1'),
-          'actual_preview_height':
-          int.parse(element.getAttribute('actual_preview_height') ?? '-1'),
-          'sample_url': element.getAttribute('sample_url') ?? '',
-          'sample_width': int.parse(
-              element.getAttribute('sample_width') ?? '-1'),
-          'sample_height':
-          int.parse(element.getAttribute('sample_height') ?? '-1'),
-          'sample_file_size':
-          int.parse(element.getAttribute('sample_file_size') ?? '-1'),
-          'jpeg_url': element.getAttribute('jpeg_url') ?? '',
-          'jpeg_width': int.parse(element.getAttribute('jpeg_width') ?? '-1'),
-          'jpeg_height': int.parse(element.getAttribute('jpeg_height') ?? '-1'),
-          'jpeg_file_size':
-          int.parse(element.getAttribute('jpeg_file_size') ?? '-1'),
-          'rating': element.getAttribute('rating') ?? '',
-          'has_children': element.getAttribute('has_children') ?? '',
-          'parent_id': element.getAttribute('parent_id') == null
+              : int.parse(element.getAttribute('score')!),
+          'width': element.getAttribute('width') == null
               ? null
-              : int.tryParse(element.getAttribute('parent_id')!),
-          'status': element.getAttribute('status') ?? '',
-          'width': int.parse(element.getAttribute('width') ?? '-1'),
-          'height': int.parse(element.getAttribute('height') ?? '-1')
+              : int.parse(element.getAttribute('width')!),
+          'height': element.getAttribute('height') == null
+              ? null
+              : int.parse(element.getAttribute('height')!),
+          'md5':  element.getAttribute('md5')!,
+          'directory':element.getElement('directory') == null ? null : element.getAttribute('directory')!,
+          'image': element.getElement('image') == null ? null : element.getAttribute('image')!,
+          'rating':  element.getAttribute('rating')!,
+          'source': element.getAttribute('source')!,
+          'change': element.getAttribute('change') == null
+              ? null
+              : int.parse(element.getAttribute('change')!),
+          'owner': element.getAttribute('owner'),
+          'creatorId': element.getAttribute('creator_id') == null
+              ? null
+              : int.parse(element.getAttribute('creator_id')!),
+          'parentId': element.getAttribute('parent_id') == null || element.getAttribute('parent_id')!.isEmpty
+              ? null
+              : int.parse(element.getAttribute('parent_id')!),
+          'sample': element.getAttribute('sample') == null
+              ? null
+              : int.parse(element.getAttribute('sample')!),
+          'previewHeight': element.getAttribute('preview_height') == null
+              ? null
+              : int.parse(element.getAttribute('preview_height')!),
+          'previewWidth': element.getAttribute('preview_width') == null
+              ? null
+              : int.parse(element.getAttribute('preview_width')!),
+          'hasNotes': element.getAttribute('has_notes') == null
+              ? null
+              : bool.parse(element.getAttribute('has_notes')!),
+          'hasComments': element.getAttribute('has_comments') == null
+              ? null
+              : bool.parse(element.getAttribute('has_comments')!),
+          'fileUrl': element.getAttribute('file_url')!,
+          'previewUrl': element.getAttribute('preview_url')!,
+          'tags':  element.getAttribute('tags')!,
+          'sampleUrl':element.getAttribute('sample_url')!,
+          'sampleHeight': element.getAttribute('sample_height') == null
+              ? null
+              : int.parse(element.getAttribute('sample_height')!),
+          'sampleWidth': element.getAttribute('sample_width') == null
+              ? null
+              : int.parse(element.getAttribute('sample_width')!),
+          'status':  element.getAttribute('status')!,
+          'postLocked': element.getAttribute('post_locked') == null
+              ? null
+              : int.parse(element.getAttribute('post_locked')!),
+          'hasChildren': element.getAttribute('has_children') == null
+              ? null
+              : bool.parse(element.getAttribute('has_children')!),
+          'id': element.getAttribute('id') == null
+              ? null
+              : int.parse(element.getAttribute('id')!),
         };
       } else if (element.children.isNotEmpty) {
         map = {
-          'id': int.parse(element.getElement('id')!.innerText),
-          'tags': element.getElement('tags')!.innerText,
-          'created_at': element.getElement('created_at')!.innerText ?? '',
-          'creator_id': int.parse(element.getElement('creator_id')!.innerText ?? '-1'),
-          'change': int.parse(element.getElement('change')!.innerText ?? '-1'),
-          'source': element.getElement('source')!.innerText ?? '',
-          'score': element.getElement('score')!.innerText,
-          'md5': element.getElement('md5')!.innerText ?? '',
-           'file_url': element.getElement('file_url')!.innerText ?? '',
-          'preview_url': element.getElement('preview_url')!.innerText ?? '',
-          'preview_width':
-          int.parse(element.getElement('preview_width')!.innerText ?? '-1'),
-          'preview_height':
-          int.parse(element.getElement('preview_height')!.innerText ?? '-1'),
-          'sample_url': element.getElement('sample_url')!.innerText ?? '',
-          'sample_width': int.parse(
-              element.getElement('sample_width')!.innerText ?? '-1'),
-          'sample_height':
-          int.parse(element.getElement('sample_height')!.innerText ?? '-1'),
-         'rating': element.getElement('rating')!.innerText ?? '',
-          'has_children': element.getElement('has_children')!.innerText ?? '',
-          'parent_id': element.getElement('parent_id')!.innerText,
-      };
+          'createdAt' : element.getElement('created_at')!.innerText,
+          'score' : element.getElement('score') == null ? null : int.parse(element.getElement('score')!.innerText),
+          'width' : element.getElement('width') == null ? null : int.parse(element.getElement('width')!.innerText),
+          'height' : element.getElement('height') == null ? null : int.parse(element.getElement('height')!.innerText),
+          'md5' :  element.getElement('md5')!.innerText,
+          'directory' :  element.getElement('directory')!.innerText,
+          'image' :  element.getElement('image')!.innerText,
+          'rating' : element.getElement('rating')!.innerText,
+          'source' :  element.getElement('source')!.innerText,
+          'change' : int.parse(element.getElement('change')!.innerText),
+          'owner' : element.getElement('owner')!.innerText,
+          'creatorId' : element.getElement('creator_id') == null ? null : int.parse(element.getElement('creator_id')!.innerText),
+          'parentId' : element.getElement('parent_id') == null ? null : int.parse(element.getElement('parent_id')!.innerText),
+          'sample' : element.getElement('sample') == null ? null : int.parse(element.getElement('sample')!.innerText),
+          'previewHeight' : element.getElement('preview_height') == null ? null : int.parse(element.getElement('preview_height')!.innerText),
+          'previewWidth' : element.getElement('preview_width') == null ? null : int.parse(element.getElement('preview_width')!.innerText),
+          'hasNotes' : element.getElement('has_notes') == null ? null : bool.parse(element.getElement('has_notes')!.innerText),
+          'hasComments' : element.getElement('has_comments') == null ? null : bool.parse(element.getElement('has_comments')!.innerText),
+          'fileUrl' :  element.getElement('file_url')!.innerText,
+          'previewUrl' :  element.getElement('preview_url')!.innerText,
+          'tags' :  element.getElement('tags')!.innerText,
+          'sampleUrl' :  element.getElement('sample_url')!.innerText,
+          'sampleHeight' : element.getElement('sample_height') == null ? null : int.parse(element.getElement('sample_height')!.innerText),
+          'sampleWidth' : element.getElement('sample_width') == null ? null : int.parse(element.getElement('sample_width')!.innerText),
+          'status' :  element.getElement('status')!.innerText,
+          'postLocked' : element.getElement('post_locked') == null ? null : int.parse(element.getElement('post_locked')!.innerText),
+          'hasChildren' : element.getElement('has_children') == null ? null : bool.parse(element.getElement('has_children')!.innerText),
+          'id' : element.getElement('id') == null ? null : int.parse(element.getElement('id')!.innerText),
+        };
       } else {
         throw Exception('No attributes or children found in post element');
       }
@@ -135,12 +161,24 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
     return posts;
   }
 
-  Future<int> count({int limit = 100,
-    int? pid,
-    List<String>? tags,
-    int? cid,
-    int? id}) async {
-Uri uri = Uri.https(super.host, 'index.php', {
+  /// Return the number of [Post]s.
+  ///
+  /// Yhe count will be affected by the request parameters.
+  /// [limit] How many posts you want to retrieve. There is a default limit of 100 posts per request.
+  /// [pid] The page number.
+  /// [tags] list of the tags
+  /// [cid] Change ID of the post. This is in Unix time so there are likely others with the same value if updated at the same time.
+  /// [id] The post id.
+  Future<int> count(
+      {int limit = 100,
+      int? pid,
+      List<String>? tags,
+      int? cid,
+      int? id}) async {
+
+    limit = limit.clamp(1, 100);
+
+    Uri uri = Uri.https(super.host, 'index.php', {
       'page': 'dapi',
       's': _endpoint,
       'q': 'index',
@@ -174,9 +212,10 @@ Uri uri = Uri.https(super.host, 'index.php', {
     }
 
     if (document.findAllElements('posts').isEmpty) {
-     return -1;
+      return -1;
     }
 
-    return int.parse(document.findAllElements('posts').first.getAttribute('count') ?? '-1');
+    return int.parse(
+        document.findAllElements('posts').first.getAttribute('count') ?? '-1');
   }
 }

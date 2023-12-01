@@ -1,4 +1,4 @@
-safebooru.org
-api.rule34.xxx
-allgirl.booru.org
-myfapbooru.booru.org
+https://safebooru.org
+https://api.rule34.xxx
+https://allgirl.booru.org
+https://myfapbooru.booru.org

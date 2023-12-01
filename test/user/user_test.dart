@@ -1,19 +1,18 @@
 
-
-import 'package:booru_dart/booru_dart.dart';
+import 'package:gelbooru/gelbooru.dart';
 import 'package:test/test.dart';
 import 'dart:io';
 
 import 'package:xml/xml.dart';
 
 void main() {
-  List<BooruClient> booruClients = [];
+  List<GelbooruClient> booruClients = [];
 
   setUpAll(() {
     File file = File('test/post_hosts.txt');
 
     booruClients =
-        file.readAsLinesSync().map((host) => BooruClient(host)).toList();
+        file.readAsLinesSync().map((host) => GelbooruClient(host)).toList();
   });
 
   test('User index', () async {
@@ -21,7 +20,7 @@ void main() {
       throw Exception('No hosts found in test/comment_hosts.txt');
     }
 
-    for (BooruClient client in booruClients) {
+    for (GelbooruClient client in booruClients) {
       try {
         List<User> users = await client.users.index();
 

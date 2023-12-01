@@ -1,9 +1,15 @@
 part of '../data_access_object.dart';
 
+/// A data access object for [Comment]s.
 final class CommentDataAccessObject extends DataAccessObject<Comment> {
   CommentDataAccessObject(client) : super(client, 'comment');
 
   /// Return a list of [Comment]s.
+  ///
+  /// [limit] How many comments you want to retrieve. There is a default limit of 100 comments per request.
+  /// [pid] The page number.
+  /// [name] The name of the commenter.
+  /// [namePattern] The name of the commenter with wildcards.
   @override
   Future<List<Comment>> index(
       {int limit = 100, int? pid, String? name, String? namePattern}) async {

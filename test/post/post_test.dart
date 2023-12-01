@@ -1,23 +1,25 @@
-import 'package:booru_dart/booru_dart.dart';
+
+import 'package:gelbooru/gelbooru.dart';
 import 'package:test/test.dart';
 import 'dart:io';
 
 void main() {
-  List<BooruClient> booruClients = [];
+  List<GelbooruClient> booruClients = [];
 
   setUpAll(() {
     File file = File('test/post_hosts.txt');
 
     booruClients =
-        file.readAsLinesSync().map((host) => BooruClient(host)).toList();
+        file.readAsLinesSync().map((host) => GelbooruClient(host)).toList();
   });
+
 
   test('Post index', () async {
     if (booruClients.isEmpty) {
-      throw Exception('No hosts found in test/comment_hosts.txt');
+      throw Exception('No hosts found in test/post_hosts.txt');
     }
 
-    for (BooruClient client in booruClients) {
+    for (GelbooruClient client in booruClients) {
       List<Post> posts = await client.posts.index(tags: ['sort:random']);
 
       if (posts.isNotEmpty) {
@@ -30,10 +32,10 @@ void main() {
 
   test('Post count', () async {
     if (booruClients.isEmpty) {
-      throw Exception('No hosts found in test/comment_hosts.txt');
+      throw Exception('No hosts found in test/post_hosts.txt');
     }
 
-    for (BooruClient client in booruClients) {
+    for (GelbooruClient client in booruClients) {
       int count = await client.posts.count(tags: ['sort:random anal']);
 
       if (count > 0) {

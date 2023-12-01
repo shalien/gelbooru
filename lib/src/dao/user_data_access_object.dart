@@ -1,10 +1,8 @@
-
-
 part of '../data_access_object.dart';
 
+/// A data access object for [User]s.
 final class UserDataAccessObject extends DataAccessObject<User> {
   const UserDataAccessObject(client) : super(client, 'user');
-
 
   /// Return a list of [User]s.
   ///
@@ -13,7 +11,8 @@ final class UserDataAccessObject extends DataAccessObject<User> {
   /// [name] The name of the user to return.
   /// [namePattern] The pattern of the name of the user to return.
   @override
-  Future<List<User>> index({int limit = 100, int? pid, String? name, String? namePattern}) async {
+  Future<List<User>> index(
+      {int limit = 100, int? pid, String? name, String? namePattern}) async {
     limit = limit.clamp(1, 100);
 
     Uri uri = Uri.https(super.host, 'index.php', {
@@ -60,5 +59,4 @@ final class UserDataAccessObject extends DataAccessObject<User> {
 
     return users;
   }
-
 }

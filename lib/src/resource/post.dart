@@ -3,9 +3,8 @@ part of '../resource.dart';
 /// A post on a booru.
 @immutable
 final class Post extends Resource {
-
   /// The date and time the post was created.
-  final DateTime createdAt;
+  final String createdAt;
 
   /// The score of the post.
   final int? score;
@@ -20,13 +19,13 @@ final class Post extends Resource {
   final String md5;
 
   /// The directory part url of the image.
-  final String directory;
+  final String? directory;
 
   /// The name of the image.
-  final String image;
+  final String? image;
 
   /// The rating of the post.
-  final String rating;
+  final String? rating;
 
   /// The source of the post.
   final String? source;
@@ -35,22 +34,22 @@ final class Post extends Resource {
   final int change;
 
   /// The id of the owner of the post.
-  final int owner;
+  final String? owner;
 
   /// The id of the creator of the post.
-  final int creatorId;
+  final int? creatorId;
 
   /// The id of the parent post.
   final int? parentId;
 
   /// The sample of the post.
-  final int sample;
+  final int? sample;
 
   /// The height of the preview image in pixels.
-  final int? previewHeight;
+  final int previewHeight;
 
   /// The width of the preview image in pixels.
-  final int? previewWidth;
+  final int previewWidth;
 
   /// Whether the post has notes.
   final bool hasNotes;
@@ -62,7 +61,7 @@ final class Post extends Resource {
   final Uri fileUrl;
 
   /// The url of the preview image.
-  final Uri? previewUrl;
+  final Uri previewUrl;
 
   /// The tags of the post.
   final List<String> tags;
@@ -79,160 +78,205 @@ final class Post extends Resource {
   /// The status of the post.
   final String status;
 
-  final int postLocked;
+  final int? postLocked;
 
-  bool get isLocked => postLocked == 1;
+  bool get isLocked => postLocked == 1 || postLocked == null;
 
   /// Whether the post has children.
   final bool hasChildren;
 
   /// Creates a [Post] instance.
   const Post(
-      this.height,
-      this.width,
+      this.createdAt,
       this.score,
-      this.fileUrl,
+      this.width,
+      this.height,
+      this.md5,
+      this.directory,
+      this.image,
+      this.rating,
+      this.source,
+      this.change,
+      this.owner,
+      this.creatorId,
       this.parentId,
+      this.sample,
+      this.previewHeight,
+      this.previewWidth,
+      this.hasNotes,
+      this.hasComments,
+      this.fileUrl,
+      this.previewUrl,
+      this.tags,
       this.sampleUrl,
       this.sampleHeight,
       this.sampleWidth,
-      this.previewUrl,
-      this.previewHeight,
-      this.previewWidth,
-      this.rating,
-      this.tags,
-      this.change,
-      this.md5,
-      this.creatorId,
-      this.hasChildren,
       this.status,
-      this.source,
-      this.hasNotes,
-      this.hasComments,
-      this.createdAt,
-      this
+      this.postLocked,
+      this.hasChildren,
       super.id);
 
   /// Creates a [Post] instance from a map.
-  Post.fromMap(super.map) :
-      map['height'] as int,
-      map['width'] as int,
-      map['score'] as int?,
-      Uri.parse(map['file_url'] as String),
-      map['parent_id'] as int?,
-      Uri.parse(map['sample_url'] as String),
-      map['sample_height'] as int,
-      map['sample_width'] as int,
-      Uri.parse(map['preview_url'] as String),
-      map['preview_height'] as int,
-      map['preview_width'] as int,
-      map['rating'] as String,
-      (map['tags'] as String).split(' '),
-      map['change'] as int,
-      map['md5'] as String,
-      map['creator_id'] as int,
-      map['has_children'] as bool,
-      map['status'] as String,
-      map['source'] as String?,
-      map['has_notes'] as bool,
-      map['has_comments'] as bool,
-      map['id'] as int,
-    );
-  }
+  Post.fromMap(super.map)
+      : createdAt = map['createdAt'],
+        score = map['score'],
+        width = map['width'],
+        height = map['height'],
+        md5 = map['md5'],
+        directory = map['directory'],
+        image = map['image'],
+        rating = map['rating'],
+        source = map['source'],
+        change = map['change'],
+        owner = map['owner'],
+        creatorId = map['creatorId'],
+        parentId = map['parentId'],
+        sample = map['sample'],
+        previewHeight = map['previewHeight'],
+        previewWidth = map['previewWidth'],
+        hasNotes = map['hasNotes'],
+        hasComments = map['hasComments'],
+        fileUrl = Uri.parse(map['fileUrl']),
+        previewUrl = Uri.parse(map['previewUrl']),
+        tags = map['tags'].split(' '),
+        sampleUrl = Uri.parse(map['sampleUrl']),
+        sampleHeight = map['sampleHeight'],
+        sampleWidth = map['sampleWidth'],
+        status = map['status'],
+        postLocked = map['postLocked'],
+        hasChildren = map['hasChildren'],
+        super.fromMap();
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is Post &&
-        other.height == height &&
-        other.width == width &&
+        other.createdAt == createdAt &&
         other.score == score &&
-        other.fileUrl == fileUrl &&
+        other.width == width &&
+        other.height == height &&
+        other.md5 == md5 &&
+        other.directory == directory &&
+        other.image == image &&
+        other.rating == rating &&
+        other.source == source &&
+        other.change == change &&
+        other.owner == owner &&
+        other.creatorId == creatorId &&
         other.parentId == parentId &&
+        other.sample == sample &&
+        other.previewHeight == previewHeight &&
+        other.previewWidth == previewWidth &&
+        other.hasNotes == hasNotes &&
+        other.hasComments == hasComments &&
+        other.fileUrl == fileUrl &&
+        other.previewUrl == previewUrl &&
+        other.tags == tags &&
         other.sampleUrl == sampleUrl &&
         other.sampleHeight == sampleHeight &&
         other.sampleWidth == sampleWidth &&
-        other.previewUrl == previewUrl &&
-        other.previewHeight == previewHeight &&
-        other.previewWidth == previewWidth &&
-        other.rating == rating &&
-        other.tags == tags &&
-        other.id == id &&
-        other.change == change &&
-        other.md5 == md5 &&
-        other.creatorId == creatorId &&
-        other.hasChildren == hasChildren &&
         other.status == status &&
-        other.source == source &&
-        other.hasNotes == hasNotes &&
-        other.hasComments == hasComments;
+        other.postLocked == postLocked &&
+        other.hasChildren == hasChildren &&
+        other.id == id;
   }
 
   @override
   Resource copyWith(
-      {int? id,
-      int? parentId,
+      {String? createdAt,
+      int? score,
+      int? width,
+      int? height,
+      String? md5,
+      String? directory,
+      String? image,
+      String? rating,
       String? source,
-      Uri? previewUrl,
+      int? change,
+      String? owner,
+      int? creatorId,
+      int? parentId,
+      int? sample,
       int? previewHeight,
       int? previewWidth,
+      bool? hasNotes,
+      bool? hasComments,
+      Uri? fileUrl,
+      Uri? previewUrl,
+      List<String>? tags,
       Uri? sampleUrl,
       int? sampleHeight,
       int? sampleWidth,
-      Uri? fileUrl,
-      int? height,
-      int? width,
-      int? score,
-      int? change,
-      String? md5,
-      int? creatorId,
-      bool? hasChildren,
       String? status,
-      bool? hasNotes,
-      bool? hasComments,
-      String? rating,
-      List<String>? tags}) {
+      int? postLocked,
+      bool? hasChildren,
+      int? id}) {
     return Post(
-      height ?? this.height,
-      width ?? this.width,
+      createdAt ?? this.createdAt,
       score ?? this.score,
-      fileUrl ?? this.fileUrl,
+      width ?? this.width,
+      height ?? this.height,
+      md5 ?? this.md5,
+      directory ?? this.directory,
+      image ?? this.image,
+      rating ?? this.rating,
+      source ?? this.source,
+      change ?? this.change,
+      owner ?? this.owner,
+      creatorId ?? this.creatorId,
       parentId ?? this.parentId,
+      sample ?? this.sample,
+      previewHeight ?? this.previewHeight,
+      previewWidth ?? this.previewWidth,
+      hasNotes ?? this.hasNotes,
+      hasComments ?? this.hasComments,
+      fileUrl ?? this.fileUrl,
+      previewUrl ?? this.previewUrl,
+      tags ?? this.tags,
       sampleUrl ?? this.sampleUrl,
       sampleHeight ?? this.sampleHeight,
       sampleWidth ?? this.sampleWidth,
-      previewUrl ?? this.previewUrl,
-      previewHeight ?? this.previewHeight,
-      previewWidth ?? this.previewWidth,
-      rating ?? this.rating,
-      tags ?? this.tags,
-      change ?? this.change,
-      md5 ?? this.md5,
-      creatorId ?? this.creatorId,
-      hasChildren ?? this.hasChildren,
       status ?? this.status,
-      source ?? this.source,
-      hasNotes ?? this.hasNotes,
-      hasComments ?? this.hasComments,
+      postLocked ?? this.postLocked,
+      hasChildren ?? this.hasChildren,
       id ?? this.id,
     );
   }
 
   @override
   int get hashCode =>
-      id.hashCode ^
-      change.hashCode ^
+      createdAt.hashCode ^
+      score.hashCode ^
+      width.hashCode ^
+      height.hashCode ^
       md5.hashCode ^
-      creatorId.hashCode ^
-      hasChildren.hashCode ^
-      status.hashCode ^
+      directory.hashCode ^
+      image.hashCode ^
+      rating.hashCode ^
       source.hashCode ^
+      change.hashCode ^
+      owner.hashCode ^
+      creatorId.hashCode ^
+      parentId.hashCode ^
+      sample.hashCode ^
+      previewHeight.hashCode ^
+      previewWidth.hashCode ^
       hasNotes.hashCode ^
-      hasComments.hashCode;
+      hasComments.hashCode ^
+      fileUrl.hashCode ^
+      previewUrl.hashCode ^
+      tags.hashCode ^
+      sampleUrl.hashCode ^
+      sampleHeight.hashCode ^
+      sampleWidth.hashCode ^
+      status.hashCode ^
+      postLocked.hashCode ^
+      hasChildren.hashCode ^
+      id.hashCode;
 
   @override
   String toString() {
-    return 'Post(height: $height, width: $width, score: $score, fileUrl: $fileUrl, parentId: $parentId, sampleUrl: $sampleUrl, sampleHeight: $sampleHeight, sampleWidth: $sampleWidth, previewUrl: $previewUrl, previewHeight: $previewHeight, previewWidth: $previewWidth, rating: $rating, tags: $tags, id: $id, change: $change, md5: $md5, creatorId: $creatorId, hasChildren: $hasChildren, status: $status, source: $source, hasNotes: $hasNotes, hasComments: $hasComments)';
+    return 'Post(createdAt: $createdAt, score: $score, width: $width, height: $height, md5: $md5, directory: $directory, image: $image, rating: $rating, source: $source, change: $change, owner: $owner, creatorId: $creatorId, parentId: $parentId, sample: $sample, previewHeight: $previewHeight, previewWidth: $previewWidth, hasNotes: $hasNotes, hasComments: $hasComments, fileUrl: $fileUrl, previewUrl: $previewUrl, tags: $tags, sampleUrl: $sampleUrl, sampleHeight: $sampleHeight, sampleWidth: $sampleWidth, status: $status, postLocked: $postLocked, hasChildren: $hasChildren, id: $id)';
   }
 }

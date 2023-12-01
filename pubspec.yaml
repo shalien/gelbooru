@@ -1,6 +1,6 @@
-name: booru_dart
+name: gelbooru
 description: A simple wrapper for Booru based image boards API.
-version: 0.0.4
+version: 3.0.0
 repository: https://github.com/shalien/booru_dart
 
 environment:

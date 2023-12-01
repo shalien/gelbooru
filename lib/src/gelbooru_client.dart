@@ -3,7 +3,7 @@ import 'package:http/http.dart';
 import 'data_access_object.dart';
 
 /// A client for a booru.
-class BooruClient extends BaseClient {
+class GelbooruClient extends BaseClient {
   /// The inner client.
   final Client _inner;
 
@@ -22,10 +22,11 @@ class BooruClient extends BaseClient {
   /// The users data access object.
   late UserDataAccessObject users;
 
-  /// Create a new [BooruClient].
+  /// Create a new [GelbooruClient].
   ///
   /// [host] The host of the booru.
-  BooruClient(this.host, {Client? inner}) : _inner = inner ?? Client() {
+  /// [inner] The inner client based on http [Client]
+  GelbooruClient(String host, {Client? inner}) : host = Uri.parse(host).host, _inner = inner ?? Client() {
     comments = CommentDataAccessObject(this);
     posts = PostDataAccessObject(this);
     tags = TagDataAccessObject(this);
