@@ -1,6 +1,6 @@
-name: booru_dart
-description: A simple wrapper for Booru based image boards API.
-version: 0.0.4
+name: gelbooru
+description: A universal package for connectiong ot various gelbooru based imageboards.
+version: 3.0.0
 repository: https://github.com/shalien/booru_dart
 
 environment:
@@ -12,5 +12,5 @@ dependencies:
   xml: ^6.3.0
 
 dev_dependencies:
-  lints: ^2.0.0
+  lints: ^3.0.0
   test: ^1.21.0

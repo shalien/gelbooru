@@ -1,3 +1,10 @@
 ## 1.0.0
 
 - Initial version.
+
+
+## 3.0.0
+
+- Rewrited totally using the DAO pattern.
+- Added tests foreach type
+- Added example
