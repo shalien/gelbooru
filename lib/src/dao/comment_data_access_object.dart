@@ -2,7 +2,6 @@ part of '../data_access_object.dart';
 
 /// A data access object for [Comment]s.
 final class CommentDataAccessObject extends DataAccessObject<Comment> {
-
   /// Create a [CommentDataAccessObject].
   CommentDataAccessObject(client) : super(client, 'comment');
 
