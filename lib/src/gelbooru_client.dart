@@ -37,4 +37,5 @@ class GelbooruClient extends BaseClient {
   Future<StreamedResponse> send(BaseRequest request) async {
     return _inner.send(request);
   }
+
 }

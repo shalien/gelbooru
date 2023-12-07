@@ -24,3 +24,7 @@
 ## 3.1.0
 
 - Changed Gelbooru parameter type and added type checking
+
+## 3.1.1
+
+- Wrong tags management fix

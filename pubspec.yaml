@@ -1,6 +1,6 @@
 name: gelbooru
 description: A universal package for connectiong ot various gelbooru based imageboards.
-version: 3.1.0
+version: 3.1.1
 repository: https://github.com/shalien/gelbooru
 
 environment:
