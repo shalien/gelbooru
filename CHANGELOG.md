@@ -29,6 +29,6 @@
 
 - Wrong tags management fix
 
-## 3.1.1
+## 3.1.2
 
 - Wrong tags management fix, again
