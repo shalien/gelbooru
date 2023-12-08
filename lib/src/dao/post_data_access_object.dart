@@ -25,7 +25,7 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
       'q': 'index',
       'limit': limit.toString(),
       ...(pid != null ? {'pid': pid.toString()} : {}),
-      ...(tags != null ? {'tags': tags.join('+')} : {}),
+      ...(tags != null ? {'tags': tags.map((e) => e.trim()).join(' ')} : {}),
       ...(cid != null ? {'cid': cid.toString()} : {}),
       ...(id != null ? {'id': id.toString()} : {}),
     });
@@ -218,7 +218,7 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
       's': _endpoint,
       'q': 'index',
       'limit': limit.toString(),
-      'tags': tags?.join('+') ?? '',
+      'tags': tags?.map((e) => e.trim()).join(' ') ?? '',
       ...(pid != null ? {'pid': pid.toString()} : {}),
       ...(cid != null ? {'cid': cid.toString()} : {}),
       ...(id != null ? {'id': id.toString()} : {}),

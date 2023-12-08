@@ -32,3 +32,7 @@
 ## 3.1.2
 
 - Wrong tags management fix, again
+- 
+## 3.1.3
+
+- Wrong tags management fix, again, again

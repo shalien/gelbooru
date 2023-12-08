@@ -56,7 +56,7 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
       ...(id != null ? {'id': id.toString()} : {}),
       ...(afterId != null ? {'after_id': afterId.toString()} : {}),
       ...(name != null ? {'name': name} : {}),
-      ...(names != null ? {'names': names.join(' ')} : {}),
+      ...(names != null ? {'names': names.map((e) => e.trim()).join(' ')} : {}),
       ...(namePattern != null ? {'name_pattern': namePattern} : {}),
       ...(order != null ? {'order': order} : {}),
       ...(orderBy != null ? {'order_by': orderBy} : {}),
