@@ -36,7 +36,7 @@ void main() {
     }
 
     for (GelbooruClient client in booruClients) {
-      int count = await client.posts.count(tags: ['sort:random anal']);
+      int count = await client.posts.count(tags: ['sort:random warhammer_40k']);
 
       if (count > 0) {
         print('Post from ${client.host}: $count');
