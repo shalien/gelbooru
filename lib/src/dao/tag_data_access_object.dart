@@ -92,6 +92,7 @@ final class TagDataAccessObject extends DataAccessObject<Tag> {
       if (element.attributes.isNotEmpty) {
         map = {
           'id': element.getAttribute('id') == null
+          || element.getAttribute('id')!.isEmpty
               ? null
               : int.parse(element.getAttribute('id')!),
           'name': element.getAttribute('name') ?? '',

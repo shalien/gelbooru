@@ -83,7 +83,8 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
               ? null
               : int.parse(element.getAttribute('change')!),
           'owner': element.getAttribute('owner'),
-          'creatorId': element.getAttribute('creator_id') == null
+          'creatorId': element.getAttribute('creator_id') == null ||
+                  element.getAttribute('creator_id')!.isEmpty
               ? null
               : int.parse(element.getAttribute('creator_id')!),
           'parentId': element.getAttribute('parent_id') == null ||
@@ -122,7 +123,8 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
           'hasChildren': element.getAttribute('has_children') == null
               ? null
               : bool.parse(element.getAttribute('has_children')!),
-          'id': element.getAttribute('id') == null
+          'id': element.getAttribute('id') == null ||
+                  element.getAttribute('id')!.isEmpty
               ? null
               : int.parse(element.getAttribute('id')!),
         };
@@ -145,7 +147,8 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
           'source': element.getElement('source')!.innerText,
           'change': int.parse(element.getElement('change')!.innerText),
           'owner': element.getElement('owner')!.innerText,
-          'creatorId': element.getElement('creator_id') == null
+          'creatorId': element.getElement('creator_id') == null ||
+                  element.getElement('creator_id')!.innerText.isEmpty
               ? null
               : int.parse(element.getElement('creator_id')!.innerText),
           'parentId': element.getElement('parent_id') == null
@@ -183,7 +186,8 @@ final class PostDataAccessObject extends DataAccessObject<Post> {
           'hasChildren': element.getElement('has_children') == null
               ? null
               : bool.parse(element.getElement('has_children')!.innerText),
-          'id': element.getElement('id') == null
+          'id': element.getElement('id') == null ||
+                  element.getElement('id')!.innerText.isEmpty
               ? null
               : int.parse(element.getElement('id')!.innerText),
         };

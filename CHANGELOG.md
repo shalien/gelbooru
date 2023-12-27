@@ -36,3 +36,7 @@
 ## 3.1.3
 
 - Wrong tags management fix, again, again
+
+## 3.1.4
+
+- Added extra type checking on the id since some sites ids are an empty string
